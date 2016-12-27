@@ -6,7 +6,7 @@
 
 ```
 require(devtools)
-devtools::install_github("jefworks/kuvi")
+devtools::install_github("jefworks/KUVI")
 ```
 
 # Usage Example
