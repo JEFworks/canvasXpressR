@@ -16,6 +16,7 @@ library(canvasXpressR)
 data(mat)
 
 ## Principal components analysis with K means clustering
+set.seed(0)
 basePca <- prcomp(mat)
 data <- basePca$x[,1:2]
 sg <- kmeans(data, centers=3)$cluster
@@ -52,7 +53,7 @@ write(canvasXpressHTML(cx, width=1200), "boxplot.html")
 
 ## Trajectories / Trees
 library(igraph)
-dis <- dist(mat[1:25,]) ## small tree
+dis <- dist(mat[1:50,]) ## small tree
 g  <- graph.adjacency(as.matrix(dis), weighted=TRUE)
 gmst <- mst(g) ## igraph object
 nodeData <- lapply(names(V(gmst)), function(x) list(name=x, id=x, group=sg[x]))
