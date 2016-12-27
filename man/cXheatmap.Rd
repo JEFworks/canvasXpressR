@@ -2,7 +2,7 @@
 % Please edit documentation in R/cXplot.R
 \name{cXheatmap}
 \alias{cXheatmap}
-\title{Writes HTML page for an interactive heatmap for input matrix}
+\title{Writes HTML page with an interactive heatmap for input matrix}
 \usage{
 cXheatmap(mat)
 }
@@ -10,13 +10,13 @@ cXheatmap(mat)
 \item{mat}{Matrix}
 }
 \description{
-Writes HTML page for an interactive heatmap for input matrix
+Writes HTML page with an interactive heatmap for input matrix
 }
 \examples{
 data(mtcars)
 mtcars <- scale(mtcars)
 mtcars <- t(scale(t(mtcars)))
-write(cXheatmap(mtcars), file="index.html")
+write(cXheatmap(mtcars), file="heatmap.html")
 
 }
 
