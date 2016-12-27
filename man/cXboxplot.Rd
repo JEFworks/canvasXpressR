@@ -8,13 +8,17 @@ cXboxplot(mat, groups)
 }
 \arguments{
 \item{mat}{Matrix}
+
+\item{groups}{Factor grouping. Should match columns of matrix.}
 }
 \description{
 Writes HTML page with interactive boxplots for each row of an input matrix
 }
 \examples{
 data(mtcars)
-write(cXboxplot(t(mtcars[, c("mpg", "hp", "wt")]), mtcars$cyl), file="boxplot.html")
+mat <- t(mtcars)
+groups <- mtcars$cyl
+write(cXboxplot(mat, groups), file="boxplot.html")
 
 }
 

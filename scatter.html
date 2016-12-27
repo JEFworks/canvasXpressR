@@ -1,0 +1,23 @@
+<html>
+           <head>
+           <link rel="stylesheet" href="http://www.canvasxpress.org/css/canvasXpress.css" type="text/css"/>
+           <script type="text/javascript" src="http://www.canvasxpress.org/js/canvasXpress.min.js"></script>
+           <script>
+           var initPage = function () {
+           var cX = new CanvasXpress("canvasId",
+           {
+           "z" :{ 'groups' : ["cyl:6", "cyl:6", "cyl:4", "cyl:6", "cyl:8", "cyl:6", "cyl:8", "cyl:4", "cyl:4", "cyl:6", "cyl:6", "cyl:8", "cyl:8", "cyl:8", "cyl:8", "cyl:8", "cyl:8", "cyl:4", "cyl:4", "cyl:4", "cyl:4", "cyl:8", "cyl:8", "cyl:8", "cyl:8", "cyl:4", "cyl:4", "cyl:4", "cyl:8", "cyl:6", "cyl:8", "cyl:4"] }, "y" :{ 'smps':["PC1", "PC2"], 'vars':["Mazda RX4", "Mazda RX4 Wag", "Datsun 710", "Hornet 4 Drive", "Hornet Sportabout", "Valiant", "Duster 360", "Merc 240D", "Merc 230", "Merc 280", "Merc 280C", "Merc 450SE", "Merc 450SL", "Merc 450SLC", "Cadillac Fleetwood", "Lincoln Continental", "Chrysler Imperial", "Fiat 128", "Honda Civic", "Toyota Corolla", "Toyota Corona", "Dodge Challenger", "AMC Javelin", "Camaro Z28", "Pontiac Firebird", "Fiat X1-9", "Porsche 914-2", "Lotus Europa", "Ford Pantera L", "Ferrari Dino", "Maserati Bora", "Volvo 142E"], 'data':[[-79.596425453236, 2.13224061202147], [-79.5985703157962, 2.14748674875565], [-133.894096227719, -5.0575701851109], [8.51655879484699, 44.9856296710911], [128.686341893339, 30.8174022216218], [-23.2201456102374, 35.1065178032107], [159.309024709251, -32.2591966863896], [-112.615804620903, 39.7021947611648], [-103.534590860715, 7.51310387381038], [-67.0468766080033, -6.20853559486834], [-66.9975138918194, -6.20638733444565], [55.21167236521, -10.373509087207], [55.1739103347954, -10.3618931245897], [55.2516020141162, -10.3709335541309], [242.814893034465, 52.501758111659], [236.36988601095, 38.2807881610081], [224.737944426012, 16.1119412824945], [-172.363653900207, 6.57552227809939], [-181.066910763927, 17.7836386343776], [-179.697851933335, 4.18821196495843], [-121.224099096051, -3.34536208299998], [80.159385595315, 34.9832140477832], [67.572430587519, 28.8940668933876], [150.354631494465, -36.633575414812], [164.652521654351, 48.2398795336415], [-171.89723146286, 6.64374639238183], [-123.804988140701, 2.03335584217317], [-137.082789153942, -28.6756469272499], [159.41322233754, -53.3183470978796], [-64.76239640917, -62.9542801466493], [145.361702625498, -139.049148628433], [-115.181783429052, -13.8263129688746]]}}, {
+           "graphType": "Scatter2D",
+           "colorBy": "groups",
+           "xAxis": ["PC1"],
+           "yAxis": ["PC2"]
+           }
+           );
+           }
+           </script>
+           </head>
+           <body onload="initPage();">
+           <canvas id="canvasId" width="540" height="540"></canvas>
+           </body>
+           </html>
+           
