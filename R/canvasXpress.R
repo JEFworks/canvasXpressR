@@ -1,4 +1,4 @@
-# Based almost entirely off of https://github.com/neuhausi/canvasXpress
+#  https://github.com/neuhausi/canvasXpress
 
 arraysCanvasXpress <- function() {
   a <- c('colors', 'colorSpectrum', 'shapes', 'sizes', 'patterns', 'images', 'highlightSmp', 'highlightVar', 'smpOverlays', 'varOverlays', 'decorations', 'decorationsColors', 'groupingFactors', 'segregateSamplesBy', 'segregateVariablesBy', 'xAxis', 'xAxisValues', 'xAxisMinorValues', 'timeValues', 'timeValueIndices', 'xAxis2Values', 'xAxis2MinorValues', 'yAxis', 'yAxisValues', 'yAxisMinorValues','zAxis', 'zAxisValues', 'zAxisMinorValues', 'rAxisValues', 'rAxisMinorValues', 'includeDOE', 'vennCompartments', 'vennColors', 'pieColors', 'ringsType', 'ringsWeight', 'stockIndicators', 'highlightNode', 'layoutBoxLabelColors', 'nodesProperties', 'edgesProperties', 'featuresProperties')
@@ -31,14 +31,14 @@ assertCanvasXpressData <- function(data = NULL, decorData = NULL, smpAnnot = NUL
 assertCanvasXpressDataFrame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType = 'Scatter2D') {
 
 	if (graphType == 'Network') {
-    if (!is.null(nodeData) && !is.data.frame(nodeData) && !is.matrix(nodeData)) {
-      stop("nodeData must be a data frame or a matrix class object.")
+    if (is.null(nodeData)) {
+      stop("nodeData missing.")
       if (!"id" %in% colnames(nodeData)) {
         stop("missing 'id' header in nodeData dataframe.")
       }
     }
-    if (!is.null(edgeData) && !is.data.frame(edgeData) && !is.matrix(edgeData)) {
-      stop("edgeData must be a data frame or a matrix class object.")
+    if (is.null(edgeData)) {
+      stop("edgeData is missing.")
       if (!"id1" %in% colnames(edgeData)) {
         stop("missing 'id1' header in edgeData dataframe.")
       }
@@ -133,10 +133,12 @@ convertRowsToList <- function(x) {
   setNames(res, rownames(x))
 }
 
-canvasXpress.data.frame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType='Scatter2D', events=NULL, afterRender=NULL, width=600, height=400, pretty=FALSE, digits=4, ...) {
+canvasXpress.data.frame <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType='Scatter2D', events=NULL, afterRender=NULL, ...) {
   canvasXpress(data, decorData, smpAnnot, varAnnot, nodeData, edgeData, vennData, vennLegend, genomeData, graphType, events, afterRender, width, height, pretty, digits, ...)
 }
 
+#' @export
+#'
 canvasXpress <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType='Scatter2D', events=NULL, afterRender=NULL, width=600, height=400, pretty=FALSE, digits=4, ...) {
 
   assertCanvasXpressData(data, decorData, smpAnnot, varAnnot, nodeData, edgeData, vennData, vennLegend, genomeData, graphType)
@@ -164,31 +166,31 @@ canvasXpress <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnno
     data <- list(venn = list(data = vennData, legend = vennLegend))
   } else if (graphType == 'Genome') {
   } else {
-    vars = assignCanvasXpressRownames(data)
-    smps = assignCanvasXpressColnames(data)
+    vars = as.list(assignCanvasXpressRownames(data))
+    smps = as.list(assignCanvasXpressColnames(data))
     dy <- as.matrix(data)
     dimnames(dy) <- NULL
     y <- list(vars = vars, smps = smps, data = dy)
     x <- NULL
     z <- NULL
     if (!is.null(smpAnnot)) {
-      vars2 = assignCanvasXpressRownames(smpAnnot)
-      smps2 = assignCanvasXpressColnames(smpAnnot)
+      vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
+      smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
       if (!identical(vars2, smps)) {
         smpAnnot <- t(smpAnnot)
-        vars2 = assignCanvasXpressRownames(smpAnnot)
-        smps2 = assignCanvasXpressColnames(smpAnnot)
+        vars2 = as.list(assignCanvasXpressRownames(smpAnnot))
+        smps2 = as.list(assignCanvasXpressColnames(smpAnnot))
       }
       if (!identical(vars2, smps)) {
-	      stop("Column names in smpAnnot are different from column names in data")
+        stop("Column names in smpAnnot are different from column names in data")
       }
       x <- lapply(convertRowsToList(t(smpAnnot)), function (d) if (length(d) > 1) d else list(d))
     }
     if (!is.null(varAnnot)) {
-      vars3 = assignCanvasXpressRownames(varAnnot)
-      smps3 = assignCanvasXpressColnames(varAnnot)
+      vars3 = as.list(assignCanvasXpressRownames(varAnnot))
+      smps3 = as.list(assignCanvasXpressColnames(varAnnot))
       if (!identical(vars3, vars)) {
-	      stop("Row names in varAnnot are different from row names in data")
+        stop("Row names in varAnnot are different from row names in data")
       }
       z <- lapply(convertRowsToList(t(varAnnot)), function (d) if (length(d) > 1) d else list(d))
     }
@@ -214,15 +216,18 @@ canvasXpress <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnno
   return(cx)
 }
 
+#' @export
+#'
 canvasXpressHTML <- function(cx, id="canvas", width="540", height="640") {
+  require(jsonlite)
     paste0('<html>
          <head>
          <link rel="stylesheet" href="http://www.canvasxpress.org/css/canvasXpress.css" type="text/css"/>
          <script type="text/javascript" src="http://www.canvasxpress.org/js/canvasXpress.min.js"></script>
          <script>
          var initPage = function () {
-            var data = ', toJSON(cx$data), ';
-            var config = ', gsub("\\[|\\]", "", toJSON(data.frame(cx$config))), ';
+            var data = ', toJSON(cx$data,auto_unbox=TRUE,pretty=TRUE), ';
+            var config = ', toJSON(cx$config,auto_unbox=TRUE,pretty=TRUE), ';
             var cX = new CanvasXpress("', id, '", data, config);
          }
          </script>

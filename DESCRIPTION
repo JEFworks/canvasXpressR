@@ -9,3 +9,6 @@ Description: canvasXpressR is an R package that helps you share results with col
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Imports: jsonlite
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
