@@ -1,5 +1,5 @@
 ---
-title: "Sample single cell analysis shared with canvasXpressR"
+title: "Sharing sample single cell analysis with canvasXpressR"
 author: "Jean Fan"
 date: "`r Sys.Date()`"
 output: pdf_document
@@ -9,12 +9,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+In this tutorial, we will analyze single cell multi-dimensional rt-qpcr data from [Guo et al.](http://www.cell.com/developmental-cell/abstract/S1534-5807(10)00110-3) and share the results as HTML pages using `canvasXpressR`. 
+
+# Getting started
+
 ```{r}
 library(canvasXpressR)
 
 ## Load rt-qpcr data from Guo et al.
 data(mat)
+```
 
+# Scatterplot
+
+First, we will perform principal component analysis with k-means clustering and visualize the first and second PCs with a scatterplot. 
+
+```{r}
 ## Principal components analysis with K means clustering
 set.seed(0)
 basePca <- prcomp(mat)
@@ -26,8 +36,15 @@ varAnnot <- data.frame(sg)
 colnames(varAnnot) <- 'Cell Type'
 cx <- canvasXpress(data, varAnnot=varAnnot, graphType='Scatter2D', colorBy='Cell Type')
 write(canvasXpressHTML(cx), "pca.html")
+```
 
+We can now share the [pca.html](http://jef.works/canvasXpressR/pca.html) page directly to our collaborators for them to explore further. Note that all data are contained within this HTML page so you do not need to worry about uploading the data somewhere. Just open the HTML page and click to explore!
 
+# Heatmap
+
+Next, we will plot a heatmap with cells as rows and genes as columns. We will keep the cell type groups we found from the PCA and visualize them as row side colors. 
+
+```{r}
 ## Expression heatmap
 cmat <- t(mat)
 cx <- canvasXpress(cmat, smpAnnot=varAnnot, graphType='Heatmap', 
@@ -41,16 +58,30 @@ cx <- canvasXpress(cmat, smpAnnot=varAnnot, graphType='Heatmap',
                    variablesClustered=TRUE,
                    showSampleNames=FALSE)
 write(canvasXpressHTML(cx), "heatmap.html")
+```
 
+We can now share the [heatmap.html](http://jef.works/canvasXpressR/heatmap.html) page directly to our collaborators for them to explore further. This is most helpful for collaborators to pick and choose which genes they want included in the final heatmap. 
 
+# Boxplots
+
+Now (my favorite utility), we will plot boxplots of each gene for each cell type.
+
+```{r}
 ## Boxplots
 cx <- canvasXpress(t(mat), smpAnnot=varAnnot, 
                    graphType='Boxplot', 
                    groupingFactors=list('Cell Type'), 
                    graphOrientation="vertical")
 write(canvasXpressHTML(cx, width=1200), "boxplot.html")
+```
 
+We can now share the [boxplot.html](http://jef.works/canvasXpressR/boxplot.html) page directly to our collaborators for them to explore further. Collaborators can interactively explore and visualize individual genes.
 
+# Trajectories
+
+For networks and pseudo-time trajectories, we can plot a tree structure. 
+
+```{r}
 ## Trajectories / Trees
 library(igraph)
 dis <- dist(mat[1:50,]) ## small tree
@@ -65,6 +96,9 @@ cx <- canvasXpress(nodeData=nodeData,
                    nodeSize=30,
                    showAnimation=TRUE)
 write(canvasXpressHTML(cx), "graph.html")
-
 ```
+
+We can now share the [graph.html](http://jef.works/canvasXpressR/graph.html) page directly to our collaborators for them to explore further. 
+
+# Happy sharing!
 
