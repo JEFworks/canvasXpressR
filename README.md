@@ -1,9 +1,8 @@
 # canvasXpressR
 an R package to help you share results with collaborators using canvasXpress
 
-Built on the [canvasXpress R Library](https://github.com/neuhausi/canvasXpress) and [the canvasXpress Javascript Library](http://www.canvasxpress.org).
 
-## About canvasXpress
+## About 
 ***canvasXpress*** was developed as the core visualization component for bioinformatics and systems biology analysis at Bristol-Myers Squibb. It supports a large number of [visualizations ](http://www.canvasxpress.org/html/gallery.html)to display scientific and non-scientific
 data. ***canvasXpress*** also includes a simple and unobtrusive [user interface](http://www.canvasxpress.org/html/user-interface.html) to explore complex data sets, a sofisticated and unique mechanism to keep track of all user customization for [Reproducible Research ](http://www.canvasxpress.org/html/reproducible-research.html) purposes, as well as an 'out of the box'
 broadcasting capability to synchronize selected data points in all ***canvasXpress*** plots in a page. Data can
@@ -11,7 +10,8 @@ be easily sorted, grouped, transposed, transformed or clustered dynamically. The
 as well as the zooming, panning and drag'n drop capabilities are features that make this library unique in its
 class.
 
-***canvasXpressR*** now lets you create HTML pages with interactive visualizations and portable results using ***canvasXpress***. HTML pages can then be easily shared with collaborators to allow them to interactively browse the data and make their own visualizations.
+***canvasXpressR*** lets you create HTML pages with interactive visualizations and portable results using ***canvasXpress***. HTML pages can then be easily shared with collaborators to allow them to interactively browse the data and make their own visualizations. ***canvasXpressR*** is forked from the [canvasXpress R Library](https://github.com/neuhausi/canvasXpress), which allows you to make ***canvasXpress*** objects in R-studio or seamlessly embeded in [Shiny](http://shiny.rstudio.com) web applications.
+
 
 ## Install
 
@@ -19,6 +19,7 @@ class.
 require(devtools)
 devtools::install_github('jefworks/canvasXpressR')
 ```
+
 
 ## Sharing sample single cell analysis with canvasXpressR
 
@@ -108,8 +109,6 @@ write(canvasXpressHTML(cx), "graph.html")
 ```
 
 We can now share the [graph.html](http://jef.works/canvasXpressR/graph.html) page directly to our collaborators for them to explore further.
-
+	
 # Happy sharing!
-
-
 
