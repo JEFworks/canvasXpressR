@@ -8,7 +8,7 @@
 #' data(mtcars)
 #' mtcars <- scale(mtcars)
 #' mtcars <- t(scale(t(mtcars)))
-#' write(cxHeatmap(mtcars), file="index.html")
+#' write(cXheatmap(mtcars), file="index.html")
 #'
 #' @export
 #'

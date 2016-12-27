@@ -1,6 +1,6 @@
 Package: kuvi
 Type: Package
-Title: KUVI: an R package to help share interactive results with collaborators offline
+Title: KUVI: an R package to help you share results with collaborators
 Version: 0.1
 Date: 2016-12-26
 Author: Jean Fan

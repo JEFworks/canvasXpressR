@@ -16,7 +16,7 @@ Writes HTML page for an interactive heatmap for input matrix
 data(mtcars)
 mtcars <- scale(mtcars)
 mtcars <- t(scale(t(mtcars)))
-write(cxHeatmap(mtcars), file="test.html")
+write(cXheatmap(mtcars), file="index.html")
 
 }
 
