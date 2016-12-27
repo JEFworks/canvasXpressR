@@ -1,4 +1,4 @@
-#  https://github.com/neuhausi/canvasXpress
+## Forked from https://github.com/neuhausi/canvasXpress
 
 arraysCanvasXpress <- function() {
   a <- c('colors', 'colorSpectrum', 'shapes', 'sizes', 'patterns', 'images', 'highlightSmp', 'highlightVar', 'smpOverlays', 'varOverlays', 'decorations', 'decorationsColors', 'groupingFactors', 'segregateSamplesBy', 'segregateVariablesBy', 'xAxis', 'xAxisValues', 'xAxisMinorValues', 'timeValues', 'timeValueIndices', 'xAxis2Values', 'xAxis2MinorValues', 'yAxis', 'yAxisValues', 'yAxisMinorValues','zAxis', 'zAxisValues', 'zAxisMinorValues', 'rAxisValues', 'rAxisMinorValues', 'includeDOE', 'vennCompartments', 'vennColors', 'pieColors', 'ringsType', 'ringsWeight', 'stockIndicators', 'highlightNode', 'layoutBoxLabelColors', 'nodesProperties', 'edgesProperties', 'featuresProperties')
@@ -137,6 +137,9 @@ canvasXpress.data.frame <- function(data = NULL, decorData = NULL, smpAnnot = NU
   canvasXpress(data, decorData, smpAnnot, varAnnot, nodeData, edgeData, vennData, vennLegend, genomeData, graphType, events, afterRender, width, height, pretty, digits, ...)
 }
 
+#' Creates a CanvasXpress object
+#' Refer to the CanvasXpress original documentation for more details: \code{\link{http://canvasxpress.org/html/documentation.html}}
+#'
 #' @export
 #'
 canvasXpress <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnnot = NULL, nodeData = NULL, edgeData = NULL, vennData = NULL, vennLegend = NULL, genomeData = NULL, graphType='Scatter2D', events=NULL, afterRender=NULL, width=600, height=400, pretty=FALSE, digits=4, ...) {
@@ -216,6 +219,14 @@ canvasXpress <- function(data = NULL, decorData = NULL, smpAnnot = NULL, varAnno
   return(cx)
 }
 
+
+#' Generates an HTML page given an canvasXpress object
+#'
+#' @param cx CanvasXpress Object from \code{\link{canvasXpress}}
+#' @param id HTML5 canvas ID
+#' @param width HTML5 canvas width
+#' @param height HTML5 canvas height
+#'
 #' @export
 #'
 canvasXpressHTML <- function(cx, id="canvas", width="540", height="640") {
