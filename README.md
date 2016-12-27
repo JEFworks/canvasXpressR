@@ -22,4 +22,4 @@ write(cXheatmap(mtcars), file="heatmap.html")
 ## Now just send the HTML file to your collaborators!
 ```
 
-Check out the results: http://jef.works/kuvi/
+Check out the results: http://jef.works/KUVI/
